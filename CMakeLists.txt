@@ -17,9 +17,9 @@ set(MSVC_USE_MDd_RUNTIME_LIBRARY ON)
 
 if(CMAKE_SYSTEM_NAME MATCHES "Windows")
     add_compile_options(/wd4244 /wd4819 /wd4005)
-    message("VUILib : Building under Windows")
+    message("PaperRenderer : Building under Windows")
 elseif()
-    message("VUILib : Building under Linux/Unix")
+    message("PaperRenderer : Building under Linux/Unix")
 endif()
 
 add_library(LibPRenderer STATIC include/base/test/vTest.h
@@ -80,27 +80,6 @@ set(UnitTestSrc tool/vcommit/third/include/cmdparser.hpp
         unitTest/parser/parser.html.ast.h
         unitTest/parser/pasrser.html.ast.cpp)
 
-add_executable(UnitTest main.cpp ${UnitTestSrc})
-add_executable(VCommit tool/vcommit/main.cpp
-        tool/vcommit/third/include/cmdparser.hpp
-        third/SimpleJson/sJSON.h
-        third/SimpleJson/sJSON.cpp
-)
-
-# Enable/Disable the Windows Toast Feature
-if(CMAKE_SYSTEM_NAME MATCHES "Windows")
-    message("[NOTICE] VUILib.VTest : You are now currently building VUILib.VTest under Windows, the test result will be displayed in Windows Toast")
-    target_link_libraries(UnitTest WinToast)
-elseif()
-   message("[NOTICE] VUILib.VTest : You are now currently building VUILib.VTest under Linux/Unix, the Windows Toast will be disabled")
-endif()
-
-target_include_directories(UnitTest PUBLIC ./include)
-target_include_directories(UnitTest PUBLIC ./)
-
-target_include_directories(VCommit PUBLIC tool/vcommit/third)
-target_include_directories(VCommit PUBLIC ./)
-
 target_include_directories(LibPRenderer PUBLIC ./include)
 target_include_directories(LibPRenderer PUBLIC ./)
 target_include_directories(LibPRenderer PUBLIC ./third)
@@ -110,13 +89,13 @@ target_include_directories(LibPRenderer PUBLIC ./third/OpenString-CMake)
 
 # Judge MSVC compile runtime
 if(CMAKE_SYSTEM_NAME MATCHES "Windows")
-    message("VUILib : Build under Windows OS")
-    message("VUILib : Using MSVC/Clang-CL Compiler")
+    message("PaperRenderer : Build under Windows OS")
+    message("PaperRenderer : Using MSVC/Clang-CL Compiler")
 
     # MSVC use different runtime in Debug(D/S) and Release(D/S), make them happy :)
     if (MSVC_USE_MT_RUNTIME_LIBRARY)
         target_link_directories(LibPRenderer PUBLIC libs/skia/Windows/MT)
-        message("VUILib(Skia Library) : Using MSVC MT Runtime")
+        message("PaperRenderer(Skia Library) : Using MSVC MT Runtime")
         add_compile_options(
                 $<$<CONFIG:>:/MT>
                 $<$<CONFIG:Debug>:/MT>
@@ -125,7 +104,7 @@ if(CMAKE_SYSTEM_NAME MATCHES "Windows")
     endif()
     if (MSVC_USE_MD_RUNTIME_LIBRARY)
         target_link_directories(LibPRenderer PUBLIC libs/skia/Windows/MD)
-        message("VUILib(Skia Library) : Using MSVC MD Runtime")
+        message("PaperRenderer(Skia Library) : Using MSVC MD Runtime")
         add_compile_options(
                 $<$<CONFIG:>:/MD>
                 $<$<CONFIG:Debug>:/MD>
@@ -134,7 +113,7 @@ if(CMAKE_SYSTEM_NAME MATCHES "Windows")
     endif()
     if (MSVC_USE_MTd_RUNTIME_LIBRARY)
         target_link_directories(LibPRenderer PUBLIC libs/skia/Windows/MTd)
-        message("VUILib(Skia Library) : Using MSVC MTd Runtime")
+        message("PaperRenderer(Skia Library) : Using MSVC MTd Runtime")
         add_compile_options(
                 $<$<CONFIG:>:/MTd>
                 $<$<CONFIG:Debug>:/MTd>
@@ -143,7 +122,7 @@ if(CMAKE_SYSTEM_NAME MATCHES "Windows")
     endif()
     if (MSVC_USE_MDd_RUNTIME_LIBRARY)
         target_link_directories(LibPRenderer PUBLIC libs/skia/Windows/MDd)
-        message("VUILib(Skia Library) : Using MSVC MDd Runtime")
+        message("PaperRenderer(Skia Library) : Using MSVC MDd Runtime")
         add_compile_options(
                 $<$<CONFIG:>:/MDd>
                 $<$<CONFIG:Debug>:/MDd>
@@ -152,7 +131,7 @@ if(CMAKE_SYSTEM_NAME MATCHES "Windows")
     endif()
 endif()
 
-# The behaviour of other OS will be written after VUILib3 was done on Windows
+# The behaviour of other OS will be written after PaperRenderer3 was done on Windows
 if(WIN32)
     message("Link Skia Under Windows OS")
     target_link_libraries(LibPRenderer PUBLIC
@@ -216,8 +195,6 @@ else()
             libostr
     )
 endif()
-
-target_link_libraries(UnitTest LibPRenderer libostr)
 
 add_executable(Demo_TestSkia demo/TestSkia/main.cpp)
 
