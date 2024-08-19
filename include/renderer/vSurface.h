@@ -27,9 +27,9 @@
 
 #pragma once
 
-#include <include/renderer/vRenderContext.h>
-#include <include/renderer/vRenderTarget.h>
 #include <include/renderer/vRendererBase.h>
+#include <include/renderer/vRenderTarget.h>
+#include <include/renderer/vRenderContext.h>
 
 /**
  * The surface wrapper of Skia surface class

@@ -26,7 +26,6 @@
  */
 
 #include <include/renderer/vSurface.h>
-#include <include/renderer/vGLHeader.h>
 #include <thread>
 #include <chrono>
 

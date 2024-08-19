@@ -27,8 +27,6 @@
 
 #include <include/renderer/vSurface.h>
 
-// #include <include/renderer/vGLHeader.h>
-
 sk_sp<VRenderInterface> GLInterface;
 
 #define WIDTH  640
